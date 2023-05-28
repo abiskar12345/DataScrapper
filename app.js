@@ -3,7 +3,7 @@ const apiRoutes = require("./routes");
 require("dotenv").config();
 var app = express();
 require("./dbConfig");
-
+const cronJob = require("./scheduler");
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -17,5 +17,6 @@ app.all("*", function (req, res, next) {
   next();
 });
 apiRoutes(app);
+cronJob.start();
 
 module.exports = app;

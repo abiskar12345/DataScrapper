@@ -16,7 +16,7 @@ const liveDataSchema = new Schema({
     required: true,
   },
   marketCap: {
-    type: Date,
+    type: String,
     required: true,
   },
   dayData: {

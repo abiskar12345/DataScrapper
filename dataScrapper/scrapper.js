@@ -1,6 +1,7 @@
 // const { parentPort } = require("worker_threads");
 const axios = require("axios");
 const cheerio = require("cheerio");
+const { parentPort } = require("worker_threads");
 async function scrapeData() {
   try {
     const response = await axios.get("https://coinranking.com/");
@@ -27,11 +28,12 @@ async function scrapeData() {
         dayData,
       });
     });
-    console.log(cryptocurrencies);
-    // parentPort.postMessage(cryptocurrencies);
+    return cryptocurrencies;
   } catch (error) {
     console.error("Error scraping data:", error);
   }
 }
 
-scrapeData();
+scrapeData()
+  .then((data) => parentPort.postMessage(data))
+  .catch((err) => console.log(err));
