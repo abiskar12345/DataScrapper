@@ -6,6 +6,7 @@ class LiveDataController {
       const liveData = await LiveDataService.get(req?.query.search);
       res.status(200).json({ status: "success", data: liveData });
     } catch (error) {
+      console.log(error);
       res.status(400).json({ error });
     }
   };

@@ -28,7 +28,11 @@ async function scrapeData() {
         price: price[0],
         dayData,
       });
-      NotificationService.checkAndAddNotification({ code, price, dayData });
+      NotificationService.checkAndAddNotification({
+        code,
+        price,
+        dayData,
+      });
     });
 
     return cryptocurrencies;

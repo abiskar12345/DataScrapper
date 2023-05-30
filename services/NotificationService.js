@@ -35,7 +35,7 @@ class NotificationService {
   }
 
   async getUserNotification(id) {
-    return Notification.findAll({ where: { userId: id } });
+    return Notification.find({ where: { userId: id } });
   }
 }
 
