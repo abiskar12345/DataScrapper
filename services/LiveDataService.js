@@ -1,10 +1,20 @@
-const LiveData = require("../schemas/liveData");
+const LiveData = require("../schemas/LiveData");
 
 class LiveDataService {
   constructor() {}
 
-  async get() {
-    return watchList.find();
+  async get(search) {
+    let condition = {};
+    if (search) {
+      const regex = new RegExp(search, "i");
+      condition = {
+        $or: [
+          { "cryptoCurrency.name": { $regex: regex, $options: "i" } },
+          { "cryptoCurrency.code": { $regex: regex, $options: "i" } },
+        ],
+      };
+    }
+    return LiveData.find(condition);
   }
 
   create = async (data) => {

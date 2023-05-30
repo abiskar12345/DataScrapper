@@ -1,18 +1,18 @@
-const watchList = require("../schemas/watchlist");
+const WatchList = require("../schemas/watchlist");
 
 class WatchListService {
   constructor() {}
 
   async get() {
-    return watchList.find();
+    return WatchList.find();
   }
 
   create = async (data) => {
-    return watchList.create(data);
+    return WatchList.create(data);
   };
 
   update = async (id, data) => {
-    return watchList.findOneAndUpdate(
+    return WatchList.findOneAndUpdate(
       {
         _id: id,
       },
@@ -23,13 +23,13 @@ class WatchListService {
   };
 
   remove = async (id) => {
-    return watchList.deleteOne({
+    return WatchList.deleteOne({
       _id: id,
     });
   };
 
   getById = async (id) => {
-    return watchList.findById(id);
+    return WatchList.findById(id);
   };
 }
 

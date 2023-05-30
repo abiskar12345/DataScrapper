@@ -2,6 +2,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const { parentPort } = require("worker_threads");
+const NotificationService = require("../services/NotificationService");
 async function scrapeData() {
   try {
     const response = await axios.get("https://coinranking.com/");
@@ -27,7 +28,9 @@ async function scrapeData() {
         price: price[0],
         dayData,
       });
+      NotificationService.checkAndAddNotification({ code, price, dayData });
     });
+
     return cryptocurrencies;
   } catch (error) {
     console.error("Error scraping data:", error);

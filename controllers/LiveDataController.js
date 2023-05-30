@@ -1,9 +1,9 @@
 const LiveDataService = require("../services/LiveDataService");
 
-class WatchListController {
-  getwatchList = async (req, res) => {
+class LiveDataController {
+  getLiveData = async (req, res) => {
     try {
-      const liveData = await LiveDataService.get();
+      const liveData = await LiveDataService.get(req?.query.search);
       res.status(200).json({ status: "success", data: liveData });
     } catch (error) {
       res.status(400).json({ error });
@@ -13,12 +13,12 @@ class WatchListController {
   getById = async (req, res) => {
     try {
       const { id } = req.params;
-      const watchList = await LiveDataService.getById(id);
-      res.status(200).json({ status: "success", data: watchList });
+      const liveData = await LiveDataService.getById(id);
+      res.status(200).json({ status: "success", data: liveData });
     } catch (error) {
       res.status(400).json({ error });
     }
   };
 }
 
-module.exports = new WatchListController();
+module.exports = new LiveDataController();
